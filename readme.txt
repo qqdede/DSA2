@@ -1,2 +1,2 @@
 This is the read me file.
-It will serve as an example.
+in this repo will be found exercised for the DSA 2 module
