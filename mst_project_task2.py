@@ -1,17 +1,7 @@
-#MST using Kruskal's Algorithm
+#Minimum Spanning Tree
+#Algorithm: Kruskal's algorithm with Disjoint Set Union (Union-Find)
 #Andreea Dobre 26/10/2026
 #task 2 for DSA2
-
-"""
-Minimum Spanning Tree
-Algorithm: Kruskal's algorithm with Disjoint Set Union (Union-Find).
-
-Install dependencies:
-    pip install networkx matplotlib
-
-Run:
-    mst_project_task2.py
-"""
 
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -19,11 +9,6 @@ import matplotlib.pyplot as plt
 
 #function definition
 def MyMinimumSpanningTree(Graph) -> nx.Graph:
-    """Return an MST of a connected, undirected, weighted NetworkX graph.
-    Kruskal's algorithm is implemented directly (not delegated to NetworkX).
-    Edge weights are read from the 'weight' attribute; missing weights default
-    to 1, matching NetworkX's usual MST convention.
-    """
     #input validation checks (graph undirected, not empty and connected)
     #if the condition is not true, the 'raise' stop the execution and report an error
     if Graph.is_directed():
