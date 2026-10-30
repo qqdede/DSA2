@@ -2,17 +2,68 @@
 #Task 1 DSA2
 #Andreea Dobre 25/10/2026
 
+import random
+from PIL import Image
+import numpy as np
 import matplotlib.pyplot as plt
 
-#load the image
-maze = plt.imread("maze(1).png")
 
-#display the image before prog run
-plt.imshow(maze)
-plt.title("Maze")
-#hide axes
+#store the maze in a variable and open the maze image
+IMAGE_FILE = "maze(1).png"
+maze_image = Image.open(IMAGE_FILE)
+maze_image = plt.imread("maze(1).png")
+
+
+#definition of the maze
+ROWS = 21
+COLS = 21
+CELL_SIZE = 10
+
+
+#display the image for the user
+plt.figure(figsize=(5, 5))
+plt.imshow(maze_image)
+plt.title("Original Maze: Entrance at Top, Exit at Bottom")
 plt.axis("off")
-plt.show()
+plt.tight_layout()
+plt.show()    
+
+
+#convert the image into a 21x21 grid
+#'0' represents a wall
+#'1' represents the path
+#creating a list to store the 21 rows for our maze
+image_array = np.array(maze_image)
+maze = []
+#loop all rows
+for row in range(ROWS):
+    grid_row = []
+    #loop all cols
+    for col in range(COLS):
+        #the maze is 21x21 but our image is 210x20 pixels
+        #so we need to check wall/path by checking in the middle of each square
+        x = col * 10 + 5
+        y = row * 10 + 5
+        pixel = image_array[x, y]
+        #if the pixel is 0 = wall (#), 1 = path(.)
+        if pixel[0] == 0:
+            grid_row.append("#")  #black wall
+        else:
+            grid_row.append(".")  #path
+    maze.append(grid_row)
+
+
+#start and end
+start = (0,9)
+end = (20,11)
+maze[start[0]][start[1]] = "S"
+maze[end[0]][end[1]] = "E"
+print("\nMAZE GRID")
+print("S = Start, E = Exit, # = Wall, . = Path\n")
+#going trough all 21 rows and printing the symbols for wall and path with a space between them
+for row in maze:
+    print(" ".join(row))
+    
 
 #input from user - approach: backtrack / las vegas after maze display
 choice = input("Choose an approach: backtracking / las vegas: ")
@@ -60,54 +111,3 @@ elif choice == "las vegas":
 
 visited = []
 
-def las_vegas():
-
-    position = start
-
-    visited.append(position)
-
-    for step in range(200):
-
-        if position == end:
-            return True
-
-        x, y = position
-
-        neighbours = []
-
-        directions = [
-            (-1,0),
-            (1,0),
-            (0,-1),
-            (0,1)
-        ]
-
-        for dx, dy in directions:
-
-            nx = x + dx
-            ny = y + dy
-
-            if (
-                0 <= nx < 21 and
-                0 <= ny < 21 and
-                maze[nx][ny] == 0
-            ):
-                neighbours.append((nx, ny))
-
-        if len(neighbours) == 0:
-            return False
-
-        position = random.choice(neighbours)
-
-        visited.append(position)
-
-    return False
-    success = las_vegas()
-
-    if success:
-    print("Exit found!")
-    else:
-    print("Failed after 200 steps.")
-    
-else:
-    print("Invalid choice. Please enter 'backtracking' or 'las vegas'.")
