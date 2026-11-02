@@ -1,6 +1,7 @@
 #Maze Solver Using Backtrack and Las Vegas
 #Task 1 DSA2
 #Andreea Dobre 25/10/2026
+#success rate loop added - 02/11/2026
 
 import random
 from PIL import Image
@@ -162,7 +163,7 @@ def alg_backtracking():
 #LAS VEGAS
 #max 200 moves chose randomly in 4 directions (up, right, down, left)
 #can eighter reach the exit (success) or complete the 200 moves without reaching the exit (fail)
-def alg_lasvegas(max_steps=200):
+def alg_lasvegas(max_steps=300):
     #starts at start poit of maze: (0, 9)
     current = start
     #create list that record the order of visited squares
@@ -174,7 +175,7 @@ def alg_lasvegas(max_steps=200):
         neighbours = get_neighbours(current)
         #checks if any available neighbours or dead end
         if len(neighbours) == 0:
-            #choising a random sqaure already visited to continue until reaches 200 moves
+            #choising a random square already visited to continue until reaches 200 moves
             current = random.choice(visit_order)
         else:
             #if we have available neighbours, move randomly on one position
@@ -188,7 +189,7 @@ def alg_lasvegas(max_steps=200):
     return success, visit_order, steps
     
 
-#running the selected aglhorithm
+#running the selected aglorithm
 if choice == "backtracking":
     success, visit_order = alg_backtracking()
     #counting the steps minus the first one that was start square
@@ -279,3 +280,29 @@ plt.legend(loc="lower left")
 plt.axis("off")
 plt.tight_layout()
 plt.show()
+
+
+#test success rate
+total_runs = 10000
+backtracking_successes = 0
+lasvegas_successes = 0
+
+for run in range(total_runs):
+    success, visit_order = alg_backtracking()
+    if success:
+        backtracking_successes += 1
+
+for run in range(total_runs):
+    success, visit_order, steps = alg_lasvegas()
+    if success:
+        lasvegas_successes += 1
+
+backtracking_rate = (backtracking_successes / total_runs) * 100
+lasvegas_rate = (lasvegas_successes / total_runs) * 100
+
+print("\nResults after 10 000 runs")
+print("Backtracking successes:", backtracking_successes)
+print("Backtracking success rate:", backtracking_rate, "%")
+
+print("Las Vegas successes:", lasvegas_successes)
+print("Las Vegas success rate:", lasvegas_rate, "%")
