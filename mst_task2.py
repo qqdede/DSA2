@@ -105,7 +105,6 @@ def draw_graph(graph, title, filename, pos):
     plt.title(title)
     plt.axis("off")
     plt.tight_layout()
-    plt.savefig(filename, dpi=180, bbox_inches="tight")
     plt.show()
     plt.close()
 
