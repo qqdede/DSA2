@@ -163,7 +163,7 @@ def alg_backtracking():
 #LAS VEGAS
 #max 200 moves chose randomly in 4 directions (up, right, down, left)
 #can eighter reach the exit (success) or complete the 200 moves without reaching the exit (fail)
-def alg_lasvegas(max_steps=300):
+def alg_lasvegas(max_steps=200):
     #starts at start poit of maze: (0, 9)
     current = start
     #create list that record the order of visited squares
