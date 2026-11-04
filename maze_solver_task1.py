@@ -201,8 +201,8 @@ else:
     method = "Las Vegas"
 
 print("Algorithm: ", method)
-print("Start: ", start)
-print("Exit: ", end)
+print("Start: row 1, column 9")
+print("Exit: row 21, column 11")
 print("Moves taken: ", steps)
 distinct_squares = len(set(visit_order))
 print("Distinct squares visited: ", distinct_squares)
