@@ -1,2 +1,5 @@
-This is the read me file.
-in this repo will be found exercised for the DSA 2 module
+in this repo:
+exercises for the DSA 2 module
+task 1 for assessment
+task 2 for assessment
+task 3 for assessment
